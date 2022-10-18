@@ -34,7 +34,7 @@ void AFishCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	// Set up "movement" bindings.
 	PlayerInputComponent->BindAxis("MoveForward", this, &AFishCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AFishCharacter::MoveRight);
+	//PlayerInputComponent->BindAxis("MoveRight", this, &AFishCharacter::MoveRight);
 
 	PlayerInputComponent->BindAxis("Turn", this, &AFishCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &AFishCharacter::AddControllerPitchInput);
