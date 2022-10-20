@@ -26,6 +26,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere)
+		float SPEED_MULTIPLIER = 1.0;
+
+	UPROPERTY(EditAnywhere)
+		float SENSITIVITY_MULTIPLIER = 0.3;
+
 	// Handles input for moving forward and backward.
 	UFUNCTION()
 		void MoveForward(float Value);
@@ -33,4 +39,11 @@ public:
 	// Handles input for moving right and left.
 	UFUNCTION()
 		void MoveRight(float Value);
+
+
+	UFUNCTION()
+		void AddYawInput(float Value);
+
+	UFUNCTION()
+		void AddPitchInput(float Value);
 };
