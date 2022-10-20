@@ -8,10 +8,10 @@ ASampleActor::ASampleActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MESH"));
 	VisualMesh->SetupAttachment(RootComponent);
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Content/Mesh/SampleCube.SampleCube"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/Mesh/SampleCube.SampleCube"));
 
 	if (CubeVisualAsset.Succeeded())
 	{
