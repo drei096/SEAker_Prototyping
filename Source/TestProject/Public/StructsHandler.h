@@ -7,14 +7,33 @@
 #include "StructsHandler.generated.h"
 
 USTRUCT(BlueprintType)
-struct FishInfo
+struct FFish_Profile
 {
 	GENERATED_BODY();
 
-	TEnumAsByte<FishName> fish;
 	FString fishName;
+	FString description;
 	bool isCollected = false;
 };
+
+USTRUCT(BlueprintType)
+struct FBiome_Profile
+{
+	GENERATED_BODY();
+
+	FString biomeName;
+	FString description;
+};
+
+USTRUCT(BlueprintType)
+struct FPollution_Profile
+{
+	GENERATED_BODY();
+
+	FString pollutionName;
+	FString description;
+};
+
 
 /**
  * 

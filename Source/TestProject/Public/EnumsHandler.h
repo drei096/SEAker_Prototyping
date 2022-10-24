@@ -13,6 +13,21 @@ enum FishName
 	FISH3
 };
 
+UENUM(BlueprintType, Category = "BiomeName")
+enum BiomeName
+{
+	BIOME1 = 0,
+	BIOME2,
+	BIOME3
+};
+
+UENUM(BlueprintType, Category = "PollutionType")
+enum PollutionType
+{
+	POLLUTION1 = 0,
+	POLLUTION2,
+	POLLUTION3
+};
 /**
  * 
  */
