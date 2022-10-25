@@ -2,6 +2,7 @@
 
 
 #include "FishCharacter.h"
+#include "AAnimalAttrib.h"
 
 // Sets default values
 AFishCharacter::AFishCharacter()
@@ -17,6 +18,7 @@ AFishCharacter::AFishCharacter()
 void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	almanac = new Almanac();
 }
 
 // Called every frame
@@ -33,6 +35,11 @@ void AFishCharacter::Tick(float DeltaTime)
 			UE_LOG(LogTemp, Display, TEXT("FISH DETECTED!!!"));
 		}
 	}
+
+
+	UE_LOG(LogTemp, Display, TEXT("Fish1 is collected: %s"), almanac->getFishInfo(FISH1).isCollected ? TEXT("true") : TEXT("false"));
+	UE_LOG(LogTemp, Display, TEXT("Fish2 is collected: %s"), almanac->getFishInfo(FISH2).isCollected ? TEXT("true") : TEXT("false"));
+	UE_LOG(LogTemp, Display, TEXT("Fish3 is collected: %s"), almanac->getFishInfo(FISH3).isCollected ? TEXT("true") : TEXT("false"));
 }
 
 // Called to bind functionality to input
@@ -110,6 +117,8 @@ bool AFishCharacter::GetWorldPoint()
 
 	if(hitResult.GetActor() != nullptr && hitResult.GetActor()->ActorHasTag("Fish"))
 	{
+		UAAnimalAttrib* animalAttrib = hitResult.GetActor()->FindComponentByClass<UAAnimalAttrib>();
+		almanac->tickCollected(animalAttrib->getID());
 		return true;
 	}
 

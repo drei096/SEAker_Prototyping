@@ -5,6 +5,9 @@
 
 Almanac::Almanac()
 {
+	addToDictionary(FISH1);
+	addToDictionary(FISH2);
+	addToDictionary(FISH3);
 }
 
 Almanac::~Almanac()
