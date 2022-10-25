@@ -46,4 +46,16 @@ public:
 
 	UFUNCTION()
 		void AddPitchInput(float Value);
+
+protected:
+	UPROPERTY(BlueprintReadWrite) FVector2D crossHairScreenLoc;
+
+private:
+	FVector latestCameraLoc;
+	FVector latestWorldDirection;
+	FVector latestWorldPoint;
+
+
+	bool GetRayHitLocation();
+	bool GetWorldPoint();
 };

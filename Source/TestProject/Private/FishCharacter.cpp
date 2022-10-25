@@ -17,7 +17,6 @@ AFishCharacter::AFishCharacter()
 void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -25,6 +24,15 @@ void AFishCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	bool hasHit = GetRayHitLocation();
+	if (hasHit)
+	{
+		//UE_LOG(LogTemp, Display, TEXT("HIT!!!"));
+		if (GetWorldPoint())
+		{
+			UE_LOG(LogTemp, Display, TEXT("FISH DETECTED!!!"));
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -73,4 +81,40 @@ void AFishCharacter::AddPitchInput(float Value)
 		PC->AddPitchInput(Value * SENSITIVITY_MULTIPLIER);
 	}
 
+}
+
+bool AFishCharacter::GetRayHitLocation()
+{
+	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	
+	if (PC != nullptr)
+	{
+		bool hasHit = PC->DeprojectScreenPositionToWorld(crossHairScreenLoc.X, crossHairScreenLoc.Y, latestCameraLoc, latestWorldDirection);
+		return hasHit;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool AFishCharacter::GetWorldPoint()
+{
+	FHitResult hitResult;
+	FVector startLoc = latestCameraLoc;
+	FVector endLoc = startLoc + (latestWorldDirection * 50000000.0f);
+
+	bool result = GetWorld()->LineTraceSingleByChannel(hitResult, startLoc, endLoc, ECollisionChannel::ECC_Visibility);
+
+	//DrawDebugLine(GetWorld(), startLoc, endLoc, FColor::Red, false, 5.0f, 0, 5.0f);
+
+	if(hitResult.GetActor() != nullptr && hitResult.GetActor()->ActorHasTag("Fish"))
+	{
+		return true;
+	}
+
+	latestWorldPoint = hitResult.Location;
+	latestWorldPoint.Z += 100.0f;
+	
+	return false; 
 }
