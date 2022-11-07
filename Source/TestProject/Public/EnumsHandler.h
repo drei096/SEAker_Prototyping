@@ -28,6 +28,13 @@ enum PollutionType
 	POLLUTION2,
 	POLLUTION3
 };
+
+enum ZoneType 
+{
+	ZONE1 = 0,
+	ZONE2,
+	ZONE3
+};
 /**
  * 
  */
