@@ -61,4 +61,5 @@ private:
 	bool GetWorldPoint();
 
 	Almanac* almanac;
+
 };

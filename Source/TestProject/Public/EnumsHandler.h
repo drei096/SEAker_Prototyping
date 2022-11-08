@@ -8,9 +8,9 @@
 UENUM(BlueprintType,Category="FishName")
 enum FishName
 {
-	FISH1 = 0,
-	FISH2,
-	FISH3
+	FISH1 = 0 UMETA(DisplayName = "FISH1"),
+	FISH2 UMETA(DisplayName = "FISH2"),
+	FISH3 UMETA(DisplayName = "FISH3")
 };
 
 UENUM(BlueprintType, Category = "BiomeName")
