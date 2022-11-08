@@ -4,6 +4,7 @@
 #include "FishCharacter.h"
 #include "AAnimalAttrib.h"
 
+
 // Sets default values
 AFishCharacter::AFishCharacter()
 {
@@ -19,6 +20,7 @@ void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	almanac = new Almanac();
+	MPAttrib = FindComponentByClass<UMPAttrib>();
 }
 
 // Called every frame
@@ -118,7 +120,8 @@ bool AFishCharacter::GetWorldPoint()
 	if(hitResult.GetActor() != nullptr && hitResult.GetActor()->ActorHasTag("Fish"))
 	{
 		UAAnimalAttrib* animalAttrib = hitResult.GetActor()->FindComponentByClass<UAAnimalAttrib>();
-		almanac->tickCollected(animalAttrib->getID());
+		//almanac->tickCollected(animalAttrib->getID());
+		MPAttrib->fishSchool->addCreatureToSchool(animalAttrib->getID());
 		return true;
 	}
 

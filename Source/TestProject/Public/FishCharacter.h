@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Almanac.h"
+#include "MPAttrib.h"
 #include "FishCharacter.generated.h"
 
 UCLASS()
@@ -61,5 +62,5 @@ private:
 	bool GetWorldPoint();
 
 	Almanac* almanac;
-
+	UMPAttrib* MPAttrib = nullptr;
 };
