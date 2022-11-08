@@ -17,5 +17,6 @@ void FishSchool::addCreatureToSchool(FishName fish)
 	info->fishName = UEnum::GetValueAsString(fish);
 	info->isCollected = true;
 
+	
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *info->fishName)
 }

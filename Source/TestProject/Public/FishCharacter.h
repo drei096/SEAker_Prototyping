@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Almanac.h"
 #include "MPAttribs.h"
+#include "SEAker_GameInstance.h"
 #include "FishCharacter.generated.h"
 
 UCLASS()
@@ -62,6 +63,7 @@ private:
 	bool GetWorldPoint();
 
 
-	Almanac* almanac;
+	//Almanac* almanac;
+	USEAker_GameInstance* currentGameInstance = nullptr;
 	UMPAttribs* MPAttribs = nullptr;
 };

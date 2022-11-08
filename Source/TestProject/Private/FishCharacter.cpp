@@ -18,7 +18,9 @@ AFishCharacter::AFishCharacter()
 void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	almanac = new Almanac();
+	//almanac = new Almanac();
+	currentGameInstance = (USEAker_GameInstance*) GetGameInstance();
+	currentGameInstance->CreateAlmanac();
 	MPAttribs = FindComponentByClass<UMPAttribs>();
 }
 
@@ -119,7 +121,8 @@ bool AFishCharacter::GetWorldPoint()
 	if(hitResult.GetActor() != nullptr && hitResult.GetActor()->ActorHasTag("Fish"))
 	{
 		UAAnimalAttrib* animalAttrib = hitResult.GetActor()->FindComponentByClass<UAAnimalAttrib>();
-		almanac->tickCollected(animalAttrib->getID());
+		//almanac->tickCollected(animalAttrib->getID());
+		currentGameInstance->almanac->tickCollected(animalAttrib->getID());
 		MPAttribs->getFishSchool()->addCreatureToSchool(animalAttrib->getID());
 		return true;
 	}
