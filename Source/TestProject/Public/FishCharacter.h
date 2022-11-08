@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Almanac.h"
+#include "MPAttribs.h"
 #include "FishCharacter.generated.h"
 
 UCLASS()
@@ -60,5 +61,7 @@ private:
 	bool GetRayHitLocation();
 	bool GetWorldPoint();
 
+
 	Almanac* almanac;
+	UMPAttribs* MPAttribs = nullptr;
 };

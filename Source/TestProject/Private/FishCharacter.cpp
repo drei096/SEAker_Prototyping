@@ -19,6 +19,7 @@ void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	almanac = new Almanac();
+	MPAttribs = FindComponentByClass<UMPAttribs>();
 }
 
 // Called every frame
@@ -36,7 +37,7 @@ void AFishCharacter::Tick(float DeltaTime)
 		}
 	}
 
-
+	 
 	//UE_LOG(LogTemp, Display, TEXT("Fish1 is collected: %s"), almanac->getFishInfo(FISH1).isCollected ? TEXT("true") : TEXT("false"));
 	//UE_LOG(LogTemp, Display, TEXT("Fish2 is collected: %s"), almanac->getFishInfo(FISH2).isCollected ? TEXT("true") : TEXT("false"));
 	//UE_LOG(LogTemp, Display, TEXT("Fish3 is collected: %s"), almanac->getFishInfo(FISH3).isCollected ? TEXT("true") : TEXT("false"));
@@ -119,6 +120,7 @@ bool AFishCharacter::GetWorldPoint()
 	{
 		UAAnimalAttrib* animalAttrib = hitResult.GetActor()->FindComponentByClass<UAAnimalAttrib>();
 		almanac->tickCollected(animalAttrib->getID());
+		MPAttribs->getFishSchool()->addCreatureToSchool(animalAttrib->getID());
 		return true;
 	}
 

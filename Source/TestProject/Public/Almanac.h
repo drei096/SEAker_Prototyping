@@ -8,6 +8,7 @@
 /**
  * 
  */
+
 class TESTPROJECT_API Almanac
 {
 public:
