@@ -116,10 +116,11 @@ void AFishCharacter::InteractWithFish()
 {
 	if(canInteract == true)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("WORKING"));
-		//UE_LOG(LogTemp, Warning, TEXT("%s"), *collidedActor->GetParentActor()->GetName());
-		//UAAnimalAttrib* animalAttrib = collidedActor->FindComponentByClass<UAAnimalAttrib>();
-		//currentGameInstance->almanac->tickCollected(animalAttrib->getID());
+		//UE_LOG(LogTemp, Warning, TEXT("WORKING"));
+		//UE_LOG(LogTemp, Warning, TEXT("%s"), *collidedActor->GetName());
+		UAAnimalAttrib* animalAttrib = collidedActor->FindComponentByClass<UAAnimalAttrib>();
+		currentGameInstance->almanac->tickCollected(animalAttrib->getID());
+		currentGameInstance->almanac->addToDictionary(animalAttrib->getID());
 	}
 	
 }
