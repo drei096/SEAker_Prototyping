@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "FishSchool.h"
 #include "MPAttribs.generated.h"
 
 
@@ -25,10 +24,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	FishSchool* getFishSchool();
 
 private:
-	FishSchool* fishSchool = nullptr;
 	float speed = 1.0f;
 	float FOV = 90.0f;
 };

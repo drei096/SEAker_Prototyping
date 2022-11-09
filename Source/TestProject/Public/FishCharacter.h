@@ -6,7 +6,9 @@
 #include "GameFramework/Character.h"
 #include "Almanac.h"
 #include "MPAttribs.h"
+#include "AAnimalAttrib.h"
 #include "SEAker_GameInstance.h"
+#include "Engine/TriggerVolume.h"
 #include "FishCharacter.generated.h"
 
 UCLASS()
@@ -50,8 +52,13 @@ public:
 	UFUNCTION()
 		void AddPitchInput(float Value);
 
+		
+
 protected:
 	UPROPERTY(BlueprintReadWrite) FVector2D crossHairScreenLoc;
+	UPROPERTY(BlueprintReadWrite) bool canInteract = false;
+	UPROPERTY(BlueprintReadWrite) AActor* collidedActor = nullptr;
+
 
 private:
 	FVector latestCameraLoc;
@@ -66,4 +73,8 @@ private:
 	//Almanac* almanac;
 	USEAker_GameInstance* currentGameInstance = nullptr;
 	UMPAttribs* MPAttribs = nullptr;
+
+	
+	
+	void InteractWithFish();
 };
