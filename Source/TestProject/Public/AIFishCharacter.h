@@ -30,13 +30,4 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-public:
-	virtual ATriggerVolume* getFishTriggerBox();
-
-private:
-	ATriggerVolume* fishTriggerBox = nullptr;
-
-protected:
-	UAAnimalAttrib* animalAttrib = nullptr;
-
 };

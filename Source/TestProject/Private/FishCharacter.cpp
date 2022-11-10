@@ -3,6 +3,7 @@
 #include "FishCharacter.h"
 
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 // Sets default values
@@ -19,11 +20,12 @@ AFishCharacter::AFishCharacter()
 void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	//almanac = new Almanac();
+
+	// Set up components
 	currentGameInstance = (USEAker_GameInstance*) GetGameInstance();
 	currentGameInstance->CreateAlmanac();
 	MPAttribs = FindComponentByClass<UMPAttribs>();
-
+	spawnListManager = Actor_spawnListManager->FindComponentByClass<USpawnListManager>();
 }
 
 // Called every frame
@@ -36,8 +38,7 @@ void AFishCharacter::Tick(float DeltaTime)
 	*/
 	
 
-	UE_LOG(LogTemp, Warning, TEXT("%s"), canInteract ? TEXT("true") : TEXT("false"));
-
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), canInteract ? TEXT("true") : TEXT("false"));
 
 
 
@@ -120,7 +121,8 @@ void AFishCharacter::InteractWithFish()
 		//UE_LOG(LogTemp, Warning, TEXT("%s"), *collidedActor->GetName());
 		UAAnimalAttrib* animalAttrib = collidedActor->FindComponentByClass<UAAnimalAttrib>();
 		currentGameInstance->almanac->tickCollected(animalAttrib->getID());
-		currentGameInstance->almanac->addToDictionary(animalAttrib->getID());
+		currentGameInstance->almanac->ELastFishInteracted = animalAttrib->getID();
+		spawnListManager->check_if_fishMap_completed();
 	}
 	
 }

@@ -32,8 +32,4 @@ void AAIFishCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 }
 
-ATriggerVolume* AAIFishCharacter::getFishTriggerBox()
-{
-	return fishTriggerBox;
-}
 

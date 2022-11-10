@@ -10,7 +10,8 @@ enum FishName
 {
 	FISH1 = 0,
 	FISH2,
-	FISH3
+	FISH3,
+	NONE
 };
 
 UENUM(BlueprintType, Category = "BiomeName")
