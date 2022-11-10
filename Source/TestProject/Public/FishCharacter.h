@@ -57,7 +57,14 @@ public:
 	UFUNCTION()
 		void AddPitchInput(float Value);
 
-		
+	UFUNCTION()
+		void SetGravityScale(float Value);
+
+	UFUNCTION()
+		void SetCollisionCapsuleHalfHeight(float Value);
+
+	UFUNCTION()
+		void SetCollisionCapsuleRadius(float Value);
 
 protected:
 	UPROPERTY(BlueprintReadWrite) FVector2D crossHairScreenLoc;
@@ -66,6 +73,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) AActor* Actor_spawnListManager = nullptr;
 
 private:
+	PlayerCreatureType currentPlayerCreatureType = PlayerCreatureType::CRAB;
+
 	FVector latestCameraLoc;
 	FVector latestWorldDirection;
 	FVector latestWorldPoint;
@@ -78,4 +87,5 @@ private:
 	bool GetRayHitLocation();
 	bool GetWorldPoint();
 	void InteractWithFish();
+	void SetUpCharacterValues(PlayerCreatureType type);
 };

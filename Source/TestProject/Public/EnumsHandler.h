@@ -29,6 +29,14 @@ enum PollutionType
 	POLLUTION2,
 	POLLUTION3
 };
+
+UENUM(BlueprintType, Category = "PlayerCreatureType")
+enum PlayerCreatureType
+{
+	CRAB = 0,
+	TURTLE,
+	CLOWNFISH
+};
 /**
  * 
  */

@@ -83,7 +83,7 @@ bool USpawnListManager::check_if_fishMap_completed()
 	}
 	else
 	{
-		if (currentGameInstance->almanac->ELastFishInteracted != FishName::NONE &&
+		if ( currentGameInstance->almanac->ELastFishInteracted != FishName::NONE &&
 			currentGameInstance->almanac->getFishDictionaryRef()->Find(currentGameInstance->almanac->ELastFishInteracted)->isCollected)
 		{
 			fishMap.FindAndRemoveChecked(currentGameInstance->almanac->ELastFishInteracted);

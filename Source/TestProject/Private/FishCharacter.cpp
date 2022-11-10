@@ -24,8 +24,15 @@ void AFishCharacter::BeginPlay()
 	// Set up components
 	currentGameInstance = (USEAker_GameInstance*) GetGameInstance();
 	currentGameInstance->CreateAlmanac();
-	MPAttribs = FindComponentByClass<UMPAttribs>();
+
+	if (FindComponentByClass<UMPAttribs>() != nullptr)
+		MPAttribs = FindComponentByClass<UMPAttribs>();
+
+	
 	spawnListManager = Actor_spawnListManager->FindComponentByClass<USpawnListManager>();
+
+	// Set up values
+	//SetUpCharacterValues(this->currentPlayerCreatureType);
 }
 
 // Called every frame
@@ -113,6 +120,21 @@ void AFishCharacter::AddPitchInput(float Value)
 
 }
 
+void AFishCharacter::SetGravityScale(float Value)
+{
+	this->FindComponentByClass<UCharacterMovementComponent>()->GravityScale = Value;
+}
+
+void AFishCharacter::SetCollisionCapsuleHalfHeight(float Value)
+{
+	this->FindComponentByClass<UCapsuleComponent>()->SetCapsuleHalfHeight(Value);
+}
+
+void AFishCharacter::SetCollisionCapsuleRadius(float Value)
+{
+	this->FindComponentByClass<UCapsuleComponent>()->SetCapsuleRadius(Value);
+}
+
 void AFishCharacter::InteractWithFish()
 {
 	if(canInteract == true)
@@ -125,6 +147,33 @@ void AFishCharacter::InteractWithFish()
 		spawnListManager->check_if_fishMap_completed();
 	}
 	
+}
+
+void AFishCharacter::SetUpCharacterValues(PlayerCreatureType type)
+{
+	/* NOTE:
+	 * DEFAULT VALUES ARE SET AT
+	 *
+	 * SPEED = 1.0F
+	 * SENSITIVITY = 0.3F
+	 * GRAVITY SCALE = 1.0F
+	 * CAPSULE HALF HEIGHT = 88.0F
+	 * CAPSULE RADIUS = 34.0F
+	*/
+
+	/*
+	switch(type)
+	{
+	case PlayerCreatureType::CRAB:
+		this->SPEED_MULTIPLIER = 2.5f;
+		this->SENSITIVITY_MULTIPLIER = 0.3f;
+		this->SetGravityScale(10000.0f);
+		this->SetCollisionCapsuleRadius(0.01f);
+		this->SetCollisionCapsuleHalfHeight(0.01f);
+		
+		break;
+	}
+	*/
 }
 
 bool AFishCharacter::GetRayHitLocation()
