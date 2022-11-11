@@ -10,7 +10,8 @@ enum FishName
 {
 	FISH1 = 0,
 	FISH2,
-	FISH3
+	FISH3,
+	NONE
 };
 
 UENUM(BlueprintType, Category = "BiomeName")
@@ -27,6 +28,14 @@ enum PollutionType
 	POLLUTION1 = 0,
 	POLLUTION2,
 	POLLUTION3
+};
+
+UENUM(BlueprintType, Category = "PlayerCreatureType")
+enum PlayerCreatureType
+{
+	CRAB = 0,
+	TURTLE,
+	CLOWNFISH
 };
 /**
  * 

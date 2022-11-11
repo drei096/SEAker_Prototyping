@@ -19,6 +19,7 @@ void Almanac::addToDictionary(FishName fish)
 	FFish_Profile* info = &fishDictionary.Add(fish);
 	info->fishName = UEnum::GetValueAsString(fish);
 	info->isCollected = false;
+	UE_LOG(LogTemp, Warning, TEXT("ADDED TO DICTIONARY"));
 }
 
 void Almanac::addToDictionary(BiomeName biome)
@@ -66,6 +67,7 @@ FPollution_Profile Almanac::getPollutionInfo(PollutionType pollution)
 void Almanac::tickCollected(FishName fish)
 {
 	fishDictionary[fish].isCollected = true;
+	UE_LOG(LogTemp, Warning, TEXT("COLLECTED"));
 }
 
 TMap<FishName, FFish_Profile>* Almanac::getFishDictionaryRef()

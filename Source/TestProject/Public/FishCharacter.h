@@ -6,7 +6,12 @@
 #include "GameFramework/Character.h"
 #include "Almanac.h"
 #include "MPAttribs.h"
+#include "AAnimalAttrib.h"
 #include "SEAker_GameInstance.h"
+#include "Engine/TriggerVolume.h"
+#include "SpawnListManager.h"
+#include "Kismet/GameplayStatics.h"
+
 #include "FishCharacter.generated.h"
 
 UCLASS()
@@ -35,6 +40,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		float SENSITIVITY_MULTIPLIER = 0.3;
 
+	UPROPERTY(EditAnywhere)
+		float GRAVITY_SCALE_MULTIPLIER = 1.0;
+
 	// Handles input for moving forward and backward.
 	UFUNCTION()
 		void MoveForward(float Value);
@@ -50,20 +58,43 @@ public:
 	UFUNCTION()
 		void AddPitchInput(float Value);
 
+	UFUNCTION()
+		void SetGravityScale(float Value);
+
+	UFUNCTION()
+		void SetCollisionCapsuleHalfHeight(float Value);
+
+	UFUNCTION()
+		void SetCollisionCapsuleRadius(float Value);
+
 protected:
 	UPROPERTY(BlueprintReadWrite) FVector2D crossHairScreenLoc;
+	UPROPERTY(BlueprintReadWrite) bool canInteract = false;
+	UPROPERTY(BlueprintReadWrite) AActor* collidedActor = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) AActor* Actor_spawnListManager = nullptr;
 
 private:
+	//PlayerCreatureType currentPlayerCreatureType = PlayerCreatureType::CRAB;
+
 	FVector latestCameraLoc;
 	FVector latestWorldDirection;
 	FVector latestWorldPoint;
 
-
-	bool GetRayHitLocation();
-	bool GetWorldPoint();
-
-
-	//Almanac* almanac;
 	USEAker_GameInstance* currentGameInstance = nullptr;
 	UMPAttribs* MPAttribs = nullptr;
+	USpawnListManager* spawnListManager = nullptr;
+
+private:
+	bool GetRayHitLocation();
+	bool GetWorldPoint();
+	void InteractWithFish();
+	void SetUpCharacterValues(PlayerCreatureType type);
+
+	//FOR SWITCH TESTING
+	void switchAnimal();
+
+public:
+	bool willSwitch = false;
 };
+
+

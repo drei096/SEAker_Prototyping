@@ -41,5 +41,7 @@ private:
 	TMap<BiomeName, FBiome_Profile> biomeDictionary;
 	TMap<PollutionType, FPollution_Profile> pollutionDictionary;
 
+public:
+	FishName ELastFishInteracted = FishName::NONE;
 
 };

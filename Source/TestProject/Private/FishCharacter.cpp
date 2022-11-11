@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "FishCharacter.h"
-#include "AAnimalAttrib.h"
+
+#include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 AFishCharacter::AFishCharacter()
@@ -18,10 +20,18 @@ AFishCharacter::AFishCharacter()
 void AFishCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	//almanac = new Almanac();
+
+	// Set up components
 	currentGameInstance = (USEAker_GameInstance*) GetGameInstance();
 	currentGameInstance->CreateAlmanac();
-	MPAttribs = FindComponentByClass<UMPAttribs>();
+
+	if (FindComponentByClass<UMPAttribs>() != nullptr)
+		MPAttribs = FindComponentByClass<UMPAttribs>();
+	
+	spawnListManager = Actor_spawnListManager->FindComponentByClass<USpawnListManager>();
+
+	// Set up values
+	//SetUpCharacterValues(this->currentPlayerCreatureType);
 }
 
 // Called every frame
@@ -29,6 +39,17 @@ void AFishCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/*
+	 * TRIGGER VOLUME METHOD
+	*/
+	
+
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), canInteract ? TEXT("true") : TEXT("false"));
+
+
+
+	
+	/*
 	bool hasHit = GetRayHitLocation();
 	if (hasHit)
 	{
@@ -43,6 +64,8 @@ void AFishCharacter::Tick(float DeltaTime)
 	//UE_LOG(LogTemp, Display, TEXT("Fish1 is collected: %s"), almanac->getFishInfo(FISH1).isCollected ? TEXT("true") : TEXT("false"));
 	//UE_LOG(LogTemp, Display, TEXT("Fish2 is collected: %s"), almanac->getFishInfo(FISH2).isCollected ? TEXT("true") : TEXT("false"));
 	//UE_LOG(LogTemp, Display, TEXT("Fish3 is collected: %s"), almanac->getFishInfo(FISH3).isCollected ? TEXT("true") : TEXT("false"));
+	
+	*/
 }
 
 // Called to bind functionality to input
@@ -54,10 +77,21 @@ void AFishCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveForward", this, &AFishCharacter::MoveForward);
 	//PlayerInputComponent->BindAxis("MoveRight", this, &AFishCharacter::MoveRight);
 
+	// Set up mouse look bindings
 	PlayerInputComponent->BindAxis("Turn", this, &AFishCharacter::AddYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &AFishCharacter::AddPitchInput);
-	
+
+	// Set up action bindings
+	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &AFishCharacter::InteractWithFish);
+	PlayerInputComponent->BindAction("FOR_TESTING-Switch", EInputEvent::IE_Pressed, this, &AFishCharacter::switchAnimal);
 }
+
+void AFishCharacter::switchAnimal()
+{
+	//this->GetController()->Possess((APawn*)MainPlayerScript->TurtleCharacter);
+	this->willSwitch = true;
+}
+
 
 void AFishCharacter::MoveForward(float Value)
 {
@@ -93,6 +127,62 @@ void AFishCharacter::AddPitchInput(float Value)
 
 }
 
+void AFishCharacter::SetGravityScale(float Value)
+{
+	this->FindComponentByClass<UCharacterMovementComponent>()->GravityScale = Value;
+}
+
+void AFishCharacter::SetCollisionCapsuleHalfHeight(float Value)
+{
+	this->FindComponentByClass<UCapsuleComponent>()->SetCapsuleHalfHeight(Value);
+}
+
+void AFishCharacter::SetCollisionCapsuleRadius(float Value)
+{
+	this->FindComponentByClass<UCapsuleComponent>()->SetCapsuleRadius(Value);
+}
+
+void AFishCharacter::InteractWithFish()
+{
+	if(canInteract == true)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("WORKING"));
+		//UE_LOG(LogTemp, Warning, TEXT("%s"), *collidedActor->GetName());
+		UAAnimalAttrib* animalAttrib = collidedActor->FindComponentByClass<UAAnimalAttrib>();
+		currentGameInstance->almanac->tickCollected(animalAttrib->getID());
+		currentGameInstance->almanac->ELastFishInteracted = animalAttrib->getID();
+		spawnListManager->check_if_fishMap_completed();
+	}
+	
+}
+
+void AFishCharacter::SetUpCharacterValues(PlayerCreatureType type)
+{
+	/* NOTE:
+	 * DEFAULT VALUES ARE SET AT
+	 *
+	 * SPEED = 1.0F
+	 * SENSITIVITY = 0.3F
+	 * GRAVITY SCALE = 1.0F
+	 * CAPSULE HALF HEIGHT = 88.0F
+	 * CAPSULE RADIUS = 34.0F
+	*/
+
+	/*
+	switch(type)
+	{
+	case PlayerCreatureType::CRAB:
+		this->SPEED_MULTIPLIER = 2.5f;
+		this->SENSITIVITY_MULTIPLIER = 0.3f;
+		this->SetGravityScale(10000.0f);
+		this->SetCollisionCapsuleRadius(0.01f);
+		this->SetCollisionCapsuleHalfHeight(0.01f);
+		
+		break;
+	}
+	*/
+}
+
 bool AFishCharacter::GetRayHitLocation()
 {
 	APlayerController* PC = GetWorld()->GetFirstPlayerController();
@@ -120,10 +210,11 @@ bool AFishCharacter::GetWorldPoint()
 
 	if(hitResult.GetActor() != nullptr && hitResult.GetActor()->ActorHasTag("Fish"))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *hitResult.GetActor()->GetName());
+
 		UAAnimalAttrib* animalAttrib = hitResult.GetActor()->FindComponentByClass<UAAnimalAttrib>();
-		//almanac->tickCollected(animalAttrib->getID());
 		currentGameInstance->almanac->tickCollected(animalAttrib->getID());
-		MPAttribs->getFishSchool()->addCreatureToSchool(animalAttrib->getID());
+		
 		return true;
 	}
 

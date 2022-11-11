@@ -11,7 +11,7 @@ UMPAttribs::UMPAttribs()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
-	fishSchool = new FishSchool();
+	
 }
 
 
@@ -33,8 +33,5 @@ void UMPAttribs::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 	// ...
 }
 
-FishSchool* UMPAttribs::getFishSchool()
-{
-	return fishSchool;
-}
+
 
