@@ -15,6 +15,9 @@ UActorRandomGenerator::UActorRandomGenerator()
 
 void UActorRandomGenerator::GenerateActors(FGeneratedData generatedData)
 {
+	FCollisionQueryParams fColQueryParams;
+	fColQueryParams.AddIgnoredActors(toIgnoreList);
+
 	for (int i = 0; i < generatedData.density; i++) 
 	{
 
@@ -28,22 +31,23 @@ void UActorRandomGenerator::GenerateActors(FGeneratedData generatedData)
 		float sampleY = FMath::RandRange(generatedData.zRange.X, generatedData.zRange.Y);
 		FVector rayStart = FVector(sampleX, sampleY, generatedData.maxHeight);
 
-		if (!GetWorld()->LineTraceSingleByChannel(hitResult, rayStart, FVector(rayStart.X, rayStart.Y, generatedData.minHeight), ECollisionChannel::ECC_Visibility, Params)) {
-			UE_LOG(LogTemp, Display, TEXT("Hit"));
+		if (!GetWorld()->LineTraceSingleByChannel(hitResult, rayStart, FVector(rayStart.X, rayStart.Y, generatedData.minHeight), ECollisionChannel::ECC_GameTraceChannel1, fColQueryParams)) {
+			UE_LOG(LogTemp, Display, TEXT("Not Hit"));
 			continue;
 		}
 
-		if (hitResult.TraceEnd.Y < generatedData.minHeight)
+		if (hitResult.Location.Z <= generatedData.minHeight)
 			continue;
 
 		AActor* tempRef = GetWorld()->SpawnActor<AActor>(generatedData.actorPrefab);
-		tempRef->SetActorLocation(hitResult.TraceEnd);
+		tempRef->SetActorLocation(FVector(rayStart.X, rayStart.Y, hitResult.ImpactPoint.Z));
 		tempRef->SetActorScale3D(FVector3d(
 			FMath::RandRange(generatedData.minScale.X, generatedData.maxScale.X),
 			FMath::RandRange(generatedData.minScale.Y, generatedData.maxScale.Y),
 			FMath::RandRange(generatedData.minScale.Z, generatedData.maxScale.Z)));
 
-		UE_LOG(LogTemp, Display, TEXT("X : %f, Y : %f, Z: %f"), hitResult.TraceEnd.X, hitResult.TraceEnd.Y, hitResult.TraceEnd.Z);
+		UE_LOG(LogTemp, Display, TEXT("X : %f, Y : %f, Z: %f"), hitResult.TraceEnd.X, hitResult.TraceEnd.Y, hitResult.ImpactPoint.Z);
+		UE_LOG(LogTemp, Display, TEXT("%s"), *hitResult.GetActor()->GetFName().ToString());
 	}
 	
 }

@@ -20,6 +20,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray <FGeneratedData> toGenerateList;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray <AActor*> toIgnoreList;
+
 	void GenerateActors(FGeneratedData generatedData);
 
 protected:
