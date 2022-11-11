@@ -11,6 +11,7 @@
 #include "Engine/TriggerVolume.h"
 #include "SpawnListManager.h"
 #include "Kismet/GameplayStatics.h"
+
 #include "FishCharacter.generated.h"
 
 UCLASS()
@@ -73,7 +74,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) AActor* Actor_spawnListManager = nullptr;
 
 private:
-	PlayerCreatureType currentPlayerCreatureType = PlayerCreatureType::CRAB;
+	//PlayerCreatureType currentPlayerCreatureType = PlayerCreatureType::CRAB;
 
 	FVector latestCameraLoc;
 	FVector latestWorldDirection;
@@ -88,4 +89,12 @@ private:
 	bool GetWorldPoint();
 	void InteractWithFish();
 	void SetUpCharacterValues(PlayerCreatureType type);
+
+	//FOR SWITCH TESTING
+	void switchAnimal();
+
+public:
+	bool willSwitch = false;
 };
+
+

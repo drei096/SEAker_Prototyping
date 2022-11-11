@@ -27,7 +27,6 @@ void AFishCharacter::BeginPlay()
 
 	if (FindComponentByClass<UMPAttribs>() != nullptr)
 		MPAttribs = FindComponentByClass<UMPAttribs>();
-
 	
 	spawnListManager = Actor_spawnListManager->FindComponentByClass<USpawnListManager>();
 
@@ -84,7 +83,15 @@ void AFishCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	// Set up action bindings
 	PlayerInputComponent->BindAction("Interact", EInputEvent::IE_Pressed, this, &AFishCharacter::InteractWithFish);
+	PlayerInputComponent->BindAction("FOR_TESTING-Switch", EInputEvent::IE_Pressed, this, &AFishCharacter::switchAnimal);
 }
+
+void AFishCharacter::switchAnimal()
+{
+	//this->GetController()->Possess((APawn*)MainPlayerScript->TurtleCharacter);
+	this->willSwitch = true;
+}
+
 
 void AFishCharacter::MoveForward(float Value)
 {
