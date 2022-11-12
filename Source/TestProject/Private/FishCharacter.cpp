@@ -13,7 +13,6 @@ AFishCharacter::AFishCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	this->AutoPossessPlayer = EAutoReceiveInput::Player0;
 	this->AutoReceiveInput = EAutoReceiveInput::Player0;
-
 }
 
 // Called when the game starts or when spawned
