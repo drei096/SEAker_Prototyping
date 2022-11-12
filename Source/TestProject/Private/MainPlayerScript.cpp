@@ -13,6 +13,7 @@ UMainPlayerScript::UMainPlayerScript()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+	//UGameplayStatics::GetGameMode(this->GetWorld())->DefaultPawnClass = TurtleCharacter->StaticClass();
 }
 
 
@@ -40,7 +41,8 @@ void UMainPlayerScript::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	if(currentCharacter->willSwitch)
 	{
-		currentCharacter->GetController()->Possess(this->ClownfishCharacter);
+		
+		currentCharacter->GetController()->Possess(this->SeaCucumberCharacter);
 		currentCharacter = (AFishCharacter*)UGameplayStatics::GetPlayerPawn(this->GetWorld(), 0);
 
 		currentCharacter->SetActorLocation(currentCharacterLocation);
@@ -48,6 +50,7 @@ void UMainPlayerScript::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *currentCharacter->GetName());
 		currentCharacter->willSwitch = false;
+		
 	}
 }
 

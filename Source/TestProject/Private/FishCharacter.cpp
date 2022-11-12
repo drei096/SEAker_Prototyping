@@ -26,8 +26,9 @@ void AFishCharacter::BeginPlay()
 
 	if (FindComponentByClass<UMPAttribs>() != nullptr)
 		MPAttribs = FindComponentByClass<UMPAttribs>();
-	
-	spawnListManager = Actor_spawnListManager->FindComponentByClass<USpawnListManager>();
+
+	if(Actor_spawnListManager != nullptr)
+		spawnListManager = Actor_spawnListManager->FindComponentByClass<USpawnListManager>();
 
 	// Set up values
 	//SetUpCharacterValues(this->currentPlayerCreatureType);

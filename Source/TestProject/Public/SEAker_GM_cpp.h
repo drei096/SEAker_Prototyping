@@ -12,6 +12,8 @@
 //maybe? include each class of fish/creature here?
 #include "CrabCharacter.h"
 #include "TurtleCharacter.h"
+#include "SeaCucumberCharacter.h"
+#include "ClownfishCharacter.h"
 
 #include "SEAker_GM_cpp.generated.h"
 

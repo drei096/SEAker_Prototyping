@@ -9,7 +9,8 @@ ASEAker_GM_cpp::ASEAker_GM_cpp()
 	PrimaryActorTick.bStartWithTickEnabled = false;
 	PrimaryActorTick.bAllowTickOnDedicatedServer = false;
 
-	this->DefaultPawnClass = ACrabCharacter::StaticClass();
+	//maybe assign the default pawn here depending on the level?
+	this->DefaultPawnClass = ATurtleCharacter::StaticClass();
 }
 
 ASEAker_GM_cpp::~ASEAker_GM_cpp()

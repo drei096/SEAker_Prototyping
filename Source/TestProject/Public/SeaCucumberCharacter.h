@@ -4,17 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "FishCharacter.h"
-#include "TurtleCharacter.generated.h"
+#include "SeaCucumberCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TESTPROJECT_API ATurtleCharacter : public AFishCharacter
+class TESTPROJECT_API ASeaCucumberCharacter : public AFishCharacter
 {
 	GENERATED_BODY()
-
-public:
-	ATurtleCharacter();
-	~ATurtleCharacter();
+	
 };
