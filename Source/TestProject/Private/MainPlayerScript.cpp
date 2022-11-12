@@ -25,6 +25,8 @@ void UMainPlayerScript::BeginPlay()
 	//UE_LOG(LogTemp, Warning, TEXT("%s"), *UGameplayStatics::GetGameMode(this->GetWorld())->DefaultPawnClass->GetName());
 
 	currentCharacter = (AFishCharacter*) UGameplayStatics::GetPlayerPawn(this->GetWorld(), 0);
+	currentCharacterLocation = currentCharacter->GetActorLocation();
+
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *currentCharacter->GetName());
 }
 
@@ -38,8 +40,12 @@ void UMainPlayerScript::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	if(currentCharacter->willSwitch)
 	{
-		currentCharacter->GetController()->Possess(this->TurtleCharacter);
+		currentCharacter->GetController()->Possess(this->ClownfishCharacter);
 		currentCharacter = (AFishCharacter*)UGameplayStatics::GetPlayerPawn(this->GetWorld(), 0);
+
+		currentCharacter->SetActorLocation(currentCharacterLocation);
+		currentCharacterLocation = currentCharacter->GetActorLocation();
+
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *currentCharacter->GetName());
 		currentCharacter->willSwitch = false;
 	}

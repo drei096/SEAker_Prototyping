@@ -75,7 +75,9 @@ void AFishCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	// Set up "movement" bindings.
 	PlayerInputComponent->BindAxis("MoveForward", this, &AFishCharacter::MoveForward);
-	//PlayerInputComponent->BindAxis("MoveRight", this, &AFishCharacter::MoveRight);
+
+	if(canStrafe)
+		PlayerInputComponent->BindAxis("MoveRight", this, &AFishCharacter::MoveRight);
 
 	// Set up mouse look bindings
 	PlayerInputComponent->BindAxis("Turn", this, &AFishCharacter::AddYawInput);

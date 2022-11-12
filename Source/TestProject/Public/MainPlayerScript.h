@@ -11,6 +11,7 @@
 //maybe? include each class of fish/creature here?
 #include "CrabCharacter.h"
 #include "TurtleCharacter.h"
+#include "ClownfishCharacter.h"
 
 #include "MainPlayerScript.generated.h"
 
@@ -36,7 +37,11 @@ public:
 	// SWITCHABLE CHARACTERS
 	UPROPERTY(EditAnywhere) ACrabCharacter* CrabCharacter = nullptr;
 	UPROPERTY(EditAnywhere) ATurtleCharacter* TurtleCharacter = nullptr;
+	UPROPERTY(EditAnywhere) AClownfishCharacter* ClownfishCharacter = nullptr;
 
 	// CURRENT CHARACTER
 	AFishCharacter* currentCharacter = nullptr;
+
+private:
+	FVector currentCharacterLocation;
 };

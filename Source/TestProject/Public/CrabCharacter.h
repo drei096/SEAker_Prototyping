@@ -13,5 +13,7 @@ UCLASS()
 class TESTPROJECT_API ACrabCharacter : public AFishCharacter
 {
 	GENERATED_BODY()
-	
+
+public:
+	bool canStrafe = true;
 };
