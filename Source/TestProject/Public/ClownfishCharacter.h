@@ -4,16 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "FishCharacter.h"
-#include "TurtleCharacter.generated.h"
+#include "ClownfishCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TESTPROJECT_API ATurtleCharacter : public AFishCharacter
+class TESTPROJECT_API AClownfishCharacter : public AFishCharacter
 {
 	GENERATED_BODY()
-
-public:
-	bool canStrafe = true;
+	
 };

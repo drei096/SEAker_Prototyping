@@ -43,6 +43,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		float GRAVITY_SCALE_MULTIPLIER = 1.0;
 
+	UPROPERTY(EditAnywhere)
+		bool canStrafe = false;
+
 	// Handles input for moving forward and backward.
 	UFUNCTION()
 		void MoveForward(float Value);
