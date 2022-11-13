@@ -100,13 +100,17 @@ void UActorRandomGenerator::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	for (int i = 0; i < toGenerateList.Num(); i++) 
+	if (!toGenerateList.IsEmpty()) 
 	{
-		if (toGenerateList[i].actorType == OBJECT)
-			GenerateActors(toGenerateList[i]);
-		else if (toGenerateList[i].actorType == ANIMAL)
-			GenerateAnimalActors(toGenerateList[i]);
+		for (int i = 0; i < toGenerateList.Num(); i++)
+		{
+			if (toGenerateList[i].actorType == OBJECT)
+				GenerateActors(toGenerateList[i]);
+			else if (toGenerateList[i].actorType == ANIMAL)
+				GenerateAnimalActors(toGenerateList[i]);
+		}
 	}
+	
 		
 
 	
