@@ -24,6 +24,7 @@ public:
 	TArray <AActor*> toIgnoreList;
 
 	void GenerateActors(FGeneratedData generatedData);
+	void GenerateAnimalActors(FGeneratedData generatedData);
 
 protected:
 	// Called when the game starts

@@ -40,29 +40,31 @@ struct FGeneratedData
 	GENERATED_BODY();
 
 	UPROPERTY(EditAnywhere)
-	FString actorName;
+	FString actorName = "ObjectName";
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AActor> actorPrefab;
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<ActorType> actorType = OBJECT;
 
 	//Raycast Setting
 	UPROPERTY(EditAnywhere)
-	int density;
+	int density = 1;
 	UPROPERTY(EditAnywhere)
-	float maxHeight;
+	float maxHeight = -1;
 	UPROPERTY(EditAnywhere)
-	float minHeight;
+	float minHeight = -1000;
 	UPROPERTY(EditAnywhere)
-	FVector2f xRange;
+	FVector2f xRange = FVector2f(-1,1);
 	UPROPERTY(EditAnywhere)
-	FVector2f zRange;
+	FVector2f zRange = FVector2f(-1, 1);
 
 	//Object Setting
 	UPROPERTY(EditAnywhere)
 	FVector2f rotationRange;
 	UPROPERTY(EditAnywhere)
-	FVector3f minScale;
+	FVector3f minScale = FVector3f(1, 1, 1);
 	UPROPERTY(EditAnywhere)
-	FVector3f maxScale;
+	FVector3f maxScale = FVector3f(1, 1, 1);
 };
 
 /**

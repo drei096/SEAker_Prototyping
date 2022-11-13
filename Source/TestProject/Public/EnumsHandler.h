@@ -37,6 +37,13 @@ enum PlayerCreatureType
 	TURTLE,
 	CLOWNFISH
 };
+
+UENUM(BlueprintType, Category = "ActorType")
+enum ActorType
+{
+	ANIMAL = 0,
+	OBJECT
+};
 /**
  * 
  */
