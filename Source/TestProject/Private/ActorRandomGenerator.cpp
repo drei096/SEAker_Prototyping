@@ -39,6 +39,9 @@ void UActorRandomGenerator::GenerateActors(FGeneratedData generatedData)
 		if (hitResult.Location.Z <= generatedData.minHeight)
 			continue;
 
+		if (hitResult.GetActor()->ActorHasTag("Object"))
+			continue;
+
 		AActor* tempRef = GetWorld()->SpawnActor<AActor>(generatedData.actorPrefab);
 		tempRef->SetActorLocation(FVector(rayStart.X, rayStart.Y, hitResult.ImpactPoint.Z));
 		tempRef->SetActorScale3D(FVector3d(
