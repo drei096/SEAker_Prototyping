@@ -28,4 +28,26 @@ class TESTPROJECT_API ASEAker_GM_cpp : public AGameModeBase
 public:
 	ASEAker_GM_cpp();
 	~ASEAker_GM_cpp();
+
+	virtual void BeginPlay() override;
+public:
+	UFUNCTION(BlueprintCallable)
+	void AddAlmanacToVP();
+	UFUNCTION(BlueprintCallable)
+	void AddMainMenuToVP();
+	UFUNCTION(BlueprintCallable)
+	void AddHUDToVP();
+protected:
+	UPROPERTY(EditAnywhere, Category = "Class Types")
+		TSubclassOf<UUserWidget> Almanac_Class;
+	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
+		class UAlmanac_UI* AlmanacWidget;
+	UPROPERTY(EditAnywhere, Category = "Class Types")
+		TSubclassOf<UUserWidget> MainMenu_Class;
+	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
+		class UMainMenu_UI* MainMenuWidget;
+	UPROPERTY(EditAnywhere, Category = "Class Types")
+		TSubclassOf<UUserWidget> HUD_Class;
+	UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
+		class UGameScene_HUD* HUDWidget;
 };
